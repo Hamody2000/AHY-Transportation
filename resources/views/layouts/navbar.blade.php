@@ -23,9 +23,6 @@
                 <a class="nav-link text-white" href="{{ route('clients.index') }}">العملاء</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('salaries.index') }}">الرواتب</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('loans.index') }}">السلف</a>
             </li>
             <li class="nav-item">
@@ -33,6 +30,15 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('company_transactions.index') }}">معاملات شركات</a>
+            </li>
+            <li class="nav-item">
+                <!-- Logout Button -->
+                <form method="POST" action="{{ route('logout') }}" class="nav-link">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        {{ __('Log Out') }}
+                    </button>
+                </form>
             </li>
         </ul>
     </div>
