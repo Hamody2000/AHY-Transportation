@@ -24,11 +24,16 @@
                     <td>{{ $loan->loan_date->format('Y-m-d') }}</td>
                     <td>{{ $loan->comment }}</td>
                     <td>
-                        <a href="{{ route('loans.edit', $loan->id) }}" class="btn btn-warning btn-sm">تعديل</a>
+                        <a href="{{ route('loans.edit', $loan->id) }}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i> تعديل
+                        </a>
                         <form action="{{ route('loans.destroy', $loan->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                            <button type="submit" class="btn btn-danger btn-sm"
+                             onclick="return confirm('هل أنت متأكد أنك تريد حذف هذ السلفة؟ ')">
+                                <i class="fas fa-trash-alt"></i> حذف
+                            </button>
                         </form>
                     </td>
                 </tr>

@@ -22,11 +22,16 @@
                     <td>{{ $vehicle->license_plate }}</td>
                     <td>{{ $vehicle->details }}</td>
                     <td>
-                        <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="btn btn-warning btn-sm">تعديل</a>
+                        <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i> تعديل
+                        </a>
                         <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('هل أنت متأكد أنك تريد حذف هذه المركبة؟ ')">
+                                <i class="fas fa-trash-alt"></i> حذف
+                            </button>
                         </form>
                     </td>
                 </tr>
