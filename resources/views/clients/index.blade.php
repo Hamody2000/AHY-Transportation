@@ -68,18 +68,18 @@
                         <tr>
                             <td>{{ $data['client']->id }} ID</td>
                             <td>{{ $data['client']->name }}</td>
-                            <td>{{ number_format($data['total_received'], 2) }} جنيه</td>
-                            <td>{{ number_format($data['total_spent'], 2) }} جنيه</td>
+                            <td>{{ number_format($data['total_received']) }} جنيه</td>
+                            <td>{{ number_format($data['total_spent']) }} جنيه</td>
 
                             <td>
                                 @if ($data['balance'] > 0)
-                                    <span class="text-danger">{{ number_format($data['balance'], 2) }} جنيه (عليك)</span>
+                                    <span class="text-danger">{{ number_format($data['balance']) }} جنيه (عليك)</span>
                                 @elseif ($data['balance'] < 0)
-                                    <span class="text-success">{{ number_format(abs($data['balance']), 2) }} جنيه
+                                    <span class="text-success">{{ number_format(abs($data['balance'])) }} جنيه
                                         (لصالحك)
                                     </span>
                                 @else
-                                    <span>{{ number_format($data['balance'], 2) }} جنيه</span>
+                                    <span>{{ number_format($data['balance']) }} جنيه</span>
                                 @endif
                             </td>
                             <td>

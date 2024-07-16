@@ -11,14 +11,15 @@
                     <th>التاريخ</th>
                     <th>اسم العميل</th>
                     <th>وارد منه</th>
-                    <th>سعر الطن</th>
+                    <th>سعر الطن مع العميل</th>
                     <th>عدد الأطنان</th>
+                    <th>سعر الطن مع السيارة</th>
+                    <th>العمولة</th>
                     <th>الميزان</th>
                     <th>المبيت</th>
                     <th>التحميل</th>
                     <th>التعتيق</th>
                     <th>التحويل</th>
-                    <th>العمولة</th>
                     <th>من</th>
                     <th>إلى</th>
                     <th>الإجمالي</th>
@@ -33,12 +34,15 @@
                         <td>{{ number_format($transaction->total_received) }} جنيه</td>
                         <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>
                         <td>{{ $transaction->tonnage }}</td>
+                        <td>{{ number_format($transaction->price_per_ton_car) }} جنيه</td>
+
+                        <td>{{ number_format($transaction->commission) }} جنيه</td>
+
                         <td>{{ number_format($transaction->weight) }} جنيه</td>
                         <td>{{ number_format($transaction->overnight_stay) }} جنيه</td>
                         <td>{{ number_format($transaction->loading) }} جنيه</td>
                         <td>{{ number_format($transaction->detention) }} جنيه</td>
                         <td>{{ number_format($transaction->transfer) }} جنيه</td>
-                        <td>{{ number_format($transaction->commission) }} جنيه</td>
                         <td>{{ $transaction->location_from }}</td>
                         <td>{{ $transaction->location_to }}</td>
                         <td>{{ number_format($transaction->total) }} جنيه</td>

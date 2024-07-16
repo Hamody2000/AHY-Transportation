@@ -37,12 +37,16 @@
 
         <!-- Pricing and Charges -->
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="price_per_ton">سعر الطن</label>
                 <input type="number" class="form-control" id="price_per_ton" name="price_per_ton"
                     value="{{ $transaction->price_per_ton }}" required>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <label for="price_per_ton_car">سعر الطن مع العربية</label>
+                <input type="number" class="form-control" id="price_per_ton_car" name="price_per_ton_car" value="{{ $transaction->price_per_ton_car }}">
+            </div>
+            <div class="form-group col-md-4">
                 <label for="tonnage">الحمولة</label>
                 <input type="number" class="form-control" id="tonnage" name="tonnage"
                     value="{{ $transaction->tonnage }}" required>

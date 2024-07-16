@@ -13,8 +13,6 @@
                         <th>وارد منه</th>
                         <th>إجمالي منصرف منه</th>
                         <th>منصرف منه</th>
-                        <th>التعتيق</th>
-                        <th>تحميل</th>
                         <th>النولون</th>
                         <th>العمولة</th>
                         <th>نولون العربية</th>
@@ -24,6 +22,8 @@
                         <th>باقي نولون العربية بعد العهدة</th>
                         <th>السائق</th>
                         <th>السيارة</th>
+                        <th>التعتيق</th>
+                        <th>تحميل</th>
                         <th>الأيام المتفق عليها مع السيارة</th>
                         <th>الأيام المتفق عليها مع العميل</th>
                         <th>سعر أيام المبيت مع السيارة</th>
@@ -47,8 +47,6 @@
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>{{ number_format($transaction->detention) }} جنيه</td>
-                            <td>{{ number_format($transaction->loading) }} جنيه</td>
                             <td>{{ number_format($transaction->fare) }} جنيه</td>
                             <td>{{ number_format($transaction->commission) }} جنيه</td>
                             <td>{{ number_format($transaction->truck_fare) }} جنيه</td>
@@ -58,6 +56,8 @@
                             <td>{{ number_format($transaction->final_truck_fare) }} جنيه</td>
                             <td>{{ $transaction->driver ? $transaction->driver->name : 'غير متوفر' }}</td>
                             <td>{{ $transaction->vehicle ? $transaction->vehicle->license_plate : 'غير متوفر' }}</td>
+                            <td>{{ number_format($transaction->detention) }} جنيه</td>
+                            <td>{{ number_format($transaction->loading) }} جنيه</td>
                             <td>{{ number_format($transaction->agreed_days_with_vehicle) }} يوم</td>
                             <td>{{ number_format($transaction->agreed_days_with_client) }} يوم</td>
                             <td>{{ number_format($transaction->overnight_price_with_vehicle) }} جنيه</td>
