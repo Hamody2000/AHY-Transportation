@@ -14,7 +14,7 @@ class AddTotalSpentToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function (Blueprint $table) {
-            $table->decimal('total_spent', 10, 2)->default(0)->after('total_received');
+            $table->decimal('total_spent', 10, 2)->nullable()->default(0.00)->after('total_received');
         });
     }
 

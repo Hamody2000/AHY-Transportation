@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->enum('type', ['individual', 'company']);
             $table->string('company_name')->nullable();
-            $table->decimal('total_received', 10, 2)->default(0);
+            $table->decimal('total_received', 10, 2)->nullable()->default(0.00);
             $table->timestamps();
         });
     }
