@@ -67,10 +67,10 @@
                                     class="btn btn-secondary btn-sm mx-1" title="طباعة">
                                     <i class="fas fa-print"></i> طباعة
                                 </a>
-                                {{-- <a href="{{ route('invoices.driver', ['id' => $transaction->id]) }}"
+                                <a href="{{ route('invoices.driver', ['id' => $transaction->id]) }}"
                                     class="btn btn-primary btn-sm mx-1" title="طباعة">
                                     <i class="fas fa-print"></i> طباعة فاتورة سيارة
-                                </a> --}}
+                                </a>
                                 <!-- Delete Button -->
                                 <form action="{{ route('company_transactions.destroy', $transaction->id) }}" method="POST"
                                     style="display:inline;">
