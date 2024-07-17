@@ -67,7 +67,7 @@
                                     class="btn btn-secondary btn-sm mx-1" title="طباعة">
                                     <i class="fas fa-print"></i> طباعة
                                 </a>
-                                <a href="{{ route('company-transactions.print-driver-invoice', ['id' => $transaction->id]) }}"
+                                <a href="{{ route('invoices.driver', ['id' => $transaction->id]) }}"
                                     class="btn btn-primary btn-sm mx-1" title="طباعة">
                                     <i class="fas fa-print"></i> طباعة فاتورة سيارة
                                 </a>
