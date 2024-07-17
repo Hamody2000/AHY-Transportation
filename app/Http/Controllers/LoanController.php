@@ -92,7 +92,7 @@ class LoanController extends Controller
     public function showEmployeeLoans(Employee $employee)
     {
         try {
-            $loans = $employee->loans()->paginate(15);  // Fetch loans related to this employee
+            $loans = $employee->loans()->orderBy('loan_date', 'desc')->paginate(15);  // Fetch loans related to this employee
             return view('loans.index', compact('loans', 'employee'));
         } catch (\Exception $e) {
             return redirect()->route('loans.index')
