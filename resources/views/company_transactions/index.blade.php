@@ -34,7 +34,7 @@
                         <td>{{ $transaction->date->format('Y-m-d') }}</td>
                         <td>{{ $transaction->client->name ?? 'غير متوفر' }}</td>
                         <td>{{ $transaction->driver->name ?? 'غير متوفر' }}</td>
-                        <td>{{ $transaction->vehicle->detials  ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->vehicle->details  ?? 'غير متوفر' }}</td>
                         <td>{{ number_format($transaction->total_received) }} جنيه</td>
                         <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>
                         <td>{{ $transaction->tonnage }}</td>
@@ -66,6 +66,10 @@
                                 <a href="{{ route('invoices.company', ['id' => $transaction->id]) }}"
                                     class="btn btn-secondary btn-sm mx-1" title="طباعة">
                                     <i class="fas fa-print"></i> طباعة
+                                </a>
+                                <a href="{{ route('company-transactions.print-driver-invoice', ['id' => $transaction->id]) }}"
+                                    class="btn btn-primary btn-sm mx-1" title="طباعة">
+                                    <i class="fas fa-print"></i> طباعة فاتورة سيارة
                                 </a>
                                 <!-- Delete Button -->
                                 <form action="{{ route('company_transactions.destroy', $transaction->id) }}" method="POST"
