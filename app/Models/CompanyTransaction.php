@@ -47,7 +47,11 @@ class CompanyTransaction extends Model
     }
     public function getTotalSpentAttribute()
     {
-        return $this->spends->sum('value') + $this->detention + $this->loading + $this->transfer + $this->overnight_stay + $this->total + $this->weight;
+        return $this->spends->sum('value') + $this->transfer + $this->overnight_stay + $this->total ;
+    }
+    public function getTotalSpentcarAttribute()
+    {
+        return  $this->detention + $this->loading  + $this->totalCar + $this->weight;
     }
     public function vehicle()
     {

@@ -10,6 +10,8 @@
                 <tr>
                     <th>التاريخ</th>
                     <th>اسم العميل</th>
+                    <th>اسم السائق</th>
+                    <th> السيارة</th>
                     <th>وارد منه</th>
                     <th>سعر الطن مع العميل</th>
                     <th>عدد الأطنان</th>
@@ -31,6 +33,8 @@
                     <tr>
                         <td>{{ $transaction->date->format('Y-m-d') }}</td>
                         <td>{{ $transaction->client->name ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->employee->name ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->vehicle->details }}</td>
                         <td>{{ number_format($transaction->total_received) }} جنيه</td>
                         <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>
                         <td>{{ $transaction->tonnage }}</td>

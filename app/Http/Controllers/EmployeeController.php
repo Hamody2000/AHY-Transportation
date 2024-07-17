@@ -17,7 +17,7 @@ class EmployeeController extends Controller
             $tipsPerEmployee = $totalEmployees > 0 ? $totalTips / $totalEmployees : 0;
             $typeTranslations = [
                 'driver' => 'سائق',
-                'loader' => 'عامل تحميل',
+                'loader' => ' مندوب',
                 'accountant' => 'محاسب',
             ];
             return view('employees.index', compact('employees', 'totalTips', 'tipsPerEmployee','typeTranslations'));

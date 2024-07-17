@@ -147,16 +147,22 @@
         <div class="invoice-details">
             <table>
                 <tbody>
+                    @if ($transaction->employee->name)
+                        <tr>
+                            <th>اسم السائق</th>
+                            <td>{{ $transaction->client->name }}</td>
+                        </tr>
+                    @endif
                     @if ($transaction->client->name)
                         <tr>
                             <th>اسم العميل</th>
                             <td>{{ $transaction->client->name }}</td>
                         </tr>
                     @endif
-                    @if ($transaction->price_per_ton > 0)
+                    @if ($transaction->price_per_ton_car > 0)
                         <tr>
                             <th>سعر الطن</th>
-                            <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>
+                            <td>{{ number_format($transaction->price_per_ton_car) }} جنيه</td>
                         </tr>
                     @endif
                     @if ($transaction->tonnage > 0)
@@ -195,12 +201,6 @@
                             <td>{{ number_format($transaction->loading) }} جنيه</td>
                         </tr>
                     @endif
-                    @if ($transaction->transfer > 0)
-                        <tr>
-                            <th>التحويل</th>
-                            <td>{{ number_format($transaction->transfer) }} جنيه</td>
-                        </tr>
-                    @endif
                     @if ($transaction->weight > 0)
                         <tr>
                             <th> الميزان</th>
@@ -210,7 +210,7 @@
                     @if ($transaction->total > 0)
                         <tr>
                             <th>الإجمالي</th>
-                            <td>{{ number_format($transaction->TotalSpent) }} جنيه</td>
+                            <td>{{ number_format($transaction->TotalSpentcar) }} جنيه</td>
                         </tr>
                     @endif
                 </tbody>
