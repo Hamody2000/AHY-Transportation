@@ -92,7 +92,7 @@
                     <select class="form-control" id="vehicle_id" name="vehicle_id">
                         <option value="" disabled selected>اختر السيارة</option>
                         @foreach ($vehicles as $vehicle)
-                            <option value="{{ $vehicle->id }}">{{ $vehicle->license_plate }}</option>
+                            <option value="{{ $vehicle->id }}">{{ $vehicle->details }}</option>
                         @endforeach
                     </select>
                 </div>

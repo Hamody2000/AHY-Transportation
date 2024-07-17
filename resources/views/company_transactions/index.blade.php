@@ -33,8 +33,8 @@
                     <tr>
                         <td>{{ $transaction->date->format('Y-m-d') }}</td>
                         <td>{{ $transaction->client->name ?? 'غير متوفر' }}</td>
-                        <td>{{ $transaction->employee->name ?? 'غير متوفر' }}</td>
-                        <td>{{ $transaction->vehicle->license_plate  ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->driver->name ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->vehicle->detials  ?? 'غير متوفر' }}</td>
                         <td>{{ number_format($transaction->total_received) }} جنيه</td>
                         <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>
                         <td>{{ $transaction->tonnage }}</td>
