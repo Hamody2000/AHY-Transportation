@@ -49,8 +49,10 @@ class IndividualTransactionController extends Controller
     {
         $clients = Client::where('type', 'individual')->get();
         $drivers = Employee::where('type', 'driver')->get();
+        $loaders = Employee::where('type', 'loader')->get();
+
         $vehicles = Vehicle::all();
-        return view('individual_transactions.create', compact('clients', 'drivers', 'vehicles'));
+        return view('individual_transactions.create', compact('clients', 'drivers', 'vehicles', 'loaders'));
     }
 
     public function store(Request $request)
@@ -65,6 +67,8 @@ class IndividualTransactionController extends Controller
             'remaining_truck_fare' => 'nullable|numeric',
             'vehicle_allowance' => 'nullable|numeric',
             'driver_id' => 'nullable|exists:employees,id',
+            'loader_id' => 'nullable|exists:employees,id',
+
             'vehicle_id' => 'required|exists:vehicles,id',
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
@@ -74,6 +78,7 @@ class IndividualTransactionController extends Controller
             'detention' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
+            'cargo_type' => 'nullable|string|max:255',
         ]);
 
         try {
@@ -108,8 +113,9 @@ class IndividualTransactionController extends Controller
             $clients = Client::where('type', 'individual')->get();
             $vehicles = Vehicle::all();
             $drivers = Employee::where('type', 'driver')->get();
+            $loaders = Employee::where('type', 'loader')->get();
 
-            return view('individual_transactions.edit', compact('transaction', 'clients', 'vehicles', 'drivers'));
+            return view('individual_transactions.edit', compact('transaction', 'clients', 'vehicles', 'drivers', 'loaders'));
         } catch (\Exception $e) {
             return redirect()->route('individual_transactions.index')
                 ->with('error', 'لم يتم العثور على المعاملة: ' . $e->getMessage());
@@ -130,6 +136,8 @@ class IndividualTransactionController extends Controller
             'vehicle_allowance' => 'nullable|numeric',
             'driver_id' => 'nullable|exists:employees,id',
             'vehicle_id' => 'nullable|exists:vehicles,id',
+            'loader_id' => 'nullable|exists:employees,id',
+
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
             'overnight_price_with_client' => 'required|numeric',
@@ -138,6 +146,7 @@ class IndividualTransactionController extends Controller
             'detention' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
+            'cargo_type' => 'nullable|string|max:255',
         ]);
 
         try {

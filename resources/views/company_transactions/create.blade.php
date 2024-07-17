@@ -7,29 +7,48 @@
         <form action="{{ route('company_transactions.store') }}" method="POST">
             @csrf
 
-            <!-- Client Selection -->
-            <div class="form-group">
-                <label for="client_id">العميل</label>
-                <select class="form-control" id="client_id" name="client_id" required>
-                    <option value="" disabled selected>اختر العميل</option>
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}">{{ $client->name }}</option>
-                    @endforeach
-                </select>
+            <div class="form-row">
+
+                <!-- Client Selection -->
+                <div class="form-group col-md-4">
+                    <label for="client_id">العميل</label>
+                    <select class="form-control" id="client_id" name="client_id" required>
+                        <option value="" disabled selected>اختر العميل</option>
+                        @foreach ($clients as $client)
+                            <option value="{{ $client->id }}">{{ $client->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Date -->
+                <div class="form-group col-md-4">
+                    <label for="date">التاريخ</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+
+                <!-- Total Received -->
+                <div class="form-group col-md-4">
+                    <label for="total_received">وارد منه</label>
+                    <input type="number" class="form-control" id="total_received" name="total_received">
+                </div>
             </div>
 
-            <!-- Date -->
-            <div class="form-group">
-                <label for="date">التاريخ</label>
-                <input type="date" class="form-control" id="date" name="date" required>
+            <!-- loader and cargo_type -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cargo_type">نوع الحمولة</label>
+                    <input type="text" class="form-control" id="cargo_type" name="cargo_type">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="loader_id">المندوب</label>
+                    <select class="form-control" id="loader_id" name="loader_id">
+                        <option value="" disabled selected>اختر السائق</option>
+                        @foreach ($loaders as $loader)
+                            <option value="{{ $loader->id }}">{{ $loader->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-
-            <!-- Total Received -->
-            <div class="form-group">
-                <label for="total_received">وارد منه</label>
-                <input type="number" class="form-control" id="total_received" name="total_received">
-            </div>
-
             <!-- Pricing and Charges -->
             <div class="form-row">
                 <div class="form-group col-md-6">

@@ -26,8 +26,10 @@ class CompanyTransactionController extends Controller
     {
         $clients = Client::where('type', 'company')->get();
         $drivers = Employee::where('type', 'driver')->get();
+        $loaders = Employee::where('type', 'loader')->get();
+
         $vehicles = Vehicle::all();
-        return view('company_transactions.create', compact('clients', 'drivers', 'vehicles'));
+        return view('company_transactions.create', compact('clients', 'drivers', 'vehicles', 'loaders'));
     }
 
     public function store(Request $request)
@@ -43,11 +45,14 @@ class CompanyTransactionController extends Controller
             'location_to' => 'required|string|max:255',
             'driver_id' => 'nullable|exists:employees,id',
             'vehicle_id' => 'nullable|exists:vehicles,id',
+            'loader_id' => 'nullable|exists:employees,id',
+
             'total_received' => 'required|numeric',
             'weight' => 'nullable|numeric',
             'detention' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
+            'cargo_type' => 'nullable|string|max:255',
         ]);
 
         $data = $request->all();
@@ -67,8 +72,10 @@ class CompanyTransactionController extends Controller
         $transaction = CompanyTransaction::findOrFail($id);
         $clients = Client::where('type', 'company')->get();
         $drivers = Employee::where('type', 'driver')->get();
+        $loaders = Employee::where('type', 'loader')->get();
+
         $vehicles = Vehicle::all();
-        return view('company_transactions.edit', compact('transaction', 'clients', 'vehicles', 'drivers'));
+        return view('company_transactions.edit', compact('transaction', 'clients', 'vehicles', 'drivers', 'loaders'));
     }
 
     public function update(Request $request, $id)
@@ -83,6 +90,9 @@ class CompanyTransactionController extends Controller
             'location_from' => 'required|string|max:255',
             'location_to' => 'required|string|max:255',
             'driver_id' => 'nullable|exists:employees,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
+            'loader_id' => 'nullable|exists:employees,id',
+            'cargo_type' => 'nullable|string|max:255',
             'vehicle_id' => 'nullable|exists:vehicles,id',
             'total_received' => 'required|numeric',
             'weight' => 'nullable|numeric',

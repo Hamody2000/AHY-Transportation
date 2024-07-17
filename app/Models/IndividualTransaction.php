@@ -29,6 +29,8 @@ class IndividualTransaction extends Model
         'weight',
         'driver_id',
         'vehicle_id',
+        'cargo_type',
+        'loader_id',
         'detention',
         'total_received', 'total_spent', 'remaining_for_client', 'remaining_from_client', 'spend_details',
         'fare', 'commission', 'tip', 'remaining_fare', 'advance', 'is_overnight_days_active', 'vehicle_plate_number',
@@ -49,6 +51,10 @@ class IndividualTransaction extends Model
     public function driver()
     {
         return $this->belongsTo(Employee::class, 'driver_id');
+    }
+    public function loader()
+    {
+        return $this->belongsTo(Employee::class, 'loader_id');
     }
     public function spends()
     {
@@ -95,20 +101,20 @@ class IndividualTransaction extends Model
     //     return $daysPassed > 0 ? $daysPassed : 0;
     // }
     // IndividualTransaction.php
-public function getOvernightDaysAttribute()
-{
-    if ($this->is_finished) {
-        return $this->attributes['overnight_days']; // Return the saved overnight days if the transaction is finished
+    public function getOvernightDaysAttribute()
+    {
+        if ($this->is_finished) {
+            return $this->attributes['overnight_days']; // Return the saved overnight days if the transaction is finished
+        }
+
+        $transactionDate = $this->date;
+        $agreedDaysEnd = $transactionDate->copy()->addDays($this->agreed_days_with_client);
+
+        $currentDate = now(); // or Carbon::now()
+        $daysPassed = $agreedDaysEnd->diffInDays($currentDate, false);
+
+        return $daysPassed > 0 ? $daysPassed : 0;
     }
-
-    $transactionDate = $this->date;
-    $agreedDaysEnd = $transactionDate->copy()->addDays($this->agreed_days_with_client);
-
-    $currentDate = now(); // or Carbon::now()
-    $daysPassed = $agreedDaysEnd->diffInDays($currentDate, false);
-
-    return $daysPassed > 0 ? $daysPassed : 0;
-}
 
 
     public function getNetOvernightAttribute()

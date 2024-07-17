@@ -13,7 +13,7 @@ class EmployeeController extends Controller
         try {
             $employees = Employee::all();
             $totalTips = Employee::tipsForCurrentMonth();
-            $totalEmployees = Employee::count();
+            $totalEmployees = Employee::where('type', '!=', 'driver')->count();
             $tipsPerEmployee = $totalEmployees > 0 ? $totalTips / $totalEmployees : 0;
             $typeTranslations = [
                 'driver' => 'سائق',
@@ -37,7 +37,7 @@ class EmployeeController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'type' => 'required|in:driver,loader,accountant',
-            'salary' => 'required|numeric',
+            'salary' => $request->input('type') === 'driver' ? 'nullable' : 'required|numeric',
         ]);
 
         try {
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'type' => 'required|in:driver,loader,accountant',
-            'salary' => 'required|numeric',
+            'salary' => $request->input('type') === 'driver' ? 'nullable' : 'required|numeric',
         ]);
 
         try {

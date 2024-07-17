@@ -29,7 +29,22 @@
                     <input type="number" step="0.01" class="form-control" id="total_received" name="total_received" value="{{ old('total_received', $transaction->total_received) }}">
                 </div>
             </div>
-
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cargo_type">نوع الحمولة</label>
+                    <input type="text" class="form-control" id="cargo_type" name="cargo_type">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="loader_id">المندوب</label>
+                    <select class="form-control" id="loader_id" name="loader_id">
+                        <option value="" disabled selected>اختر السائق</option>
+                        @foreach ($loaders as $loader)
+                            <option value="{{ $loader->id }}"
+                                {{ $transaction->loader_id == $loader->id ? 'selected' : '' }}>{{ $loader->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="agreed_days_with_vehicle">عدد الأيام المتفق عليها مع السيارة</label>

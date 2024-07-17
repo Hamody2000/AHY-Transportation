@@ -25,6 +25,8 @@ class CompanyTransaction extends Model
         'total',
         'driver_id',
         'vehicle_id',
+        'loader_id',
+        'cargo_type',
         'loading',
         'transfer',
         'weight',
@@ -41,6 +43,10 @@ class CompanyTransaction extends Model
     {
         return $this->belongsTo(Employee::class, 'driver_id');
     }
+    public function loader()
+    {
+        return $this->belongsTo(Employee::class, 'loader_id');
+    }
     public function spends()
     {
         return $this->hasMany(Spend::class, 'transaction_id');
@@ -51,7 +57,7 @@ class CompanyTransaction extends Model
     }
     public function getTotalSpentcarAttribute()
     {
-        return  $this->detention + $this->loading  + $this->totalCar + $this->weight;
+        return  $this->detention + $this->loading  + $this->totalCar + $this->weight + $this->totalCar;
     }
     public function vehicle()
     {

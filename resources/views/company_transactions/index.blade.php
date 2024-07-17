@@ -11,6 +11,8 @@
                     <th>التاريخ</th>
                     <th>اسم العميل</th>
                     <th>اسم السائق</th>
+                    <th>اسم المندوب</th>
+                    <th>نوع الحمولة</th>
                     <th> السيارة</th>
                     <th>وارد منه</th>
                     <th>سعر الطن مع العميل</th>
@@ -34,6 +36,8 @@
                         <td>{{ $transaction->date->format('Y-m-d') }}</td>
                         <td>{{ $transaction->client->name ?? 'غير متوفر' }}</td>
                         <td>{{ $transaction->driver->name ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->loader->name ?? 'غير متوفر' }}</td>
+                        <td>{{ $transaction->cargo_type ?? 'غير متوفر' }}</td>
                         <td>{{ $transaction->vehicle->details  ?? 'غير متوفر' }}</td>
                         <td>{{ number_format($transaction->total_received) }} جنيه</td>
                         <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>

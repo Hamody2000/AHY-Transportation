@@ -20,7 +20,6 @@
                 <tr>
                     <th>ID</th>
                     <th>اسم العميل</th>
-                    <th>التاريخ</th>
                     <th>النوع</th>
                     <th>النولون</th>
                     <th>الإقامة الليلية</th>
@@ -29,7 +28,7 @@
                     <th>التعتيق</th>
                     <th>سعر الطن</th>
                     <th>الحمولة</th>
-                    <th>الإجمالي</th>
+                 
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +36,7 @@
                 <tr>
                     <td>{{ $transaction->id }}</td>
                     <td>{{ $transaction->client->name }}</td>
-                    <td>{{ $transaction->date->format('Y-m-d') }}</td>
-                    <td>{{ $transaction->type }}</td>
+                    <td>{{ $transaction->client->type }}</td>
                     <td>{{ number_format($transaction->fare ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->overnight_stay ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->commission ?? 0, 0) }} جنيه</td>
@@ -46,7 +44,7 @@
                     <td>{{ number_format($transaction->detention ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->price_per_ton ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->tonnage ?? 0, 0) }} طن</td>
-                    <td>{{ number_format($transaction->total ?? 0, 0) }} جنيه</td>
+
                 </tr>
                 @endforeach
             </tbody>

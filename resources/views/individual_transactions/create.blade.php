@@ -25,6 +25,22 @@
                 <input type="number" class="form-control" id="total_received" name="total_received">
             </div>
         </div>
+           <!-- loader and cargo_type -->
+           <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="cargo_type">نوع الحمولة</label>
+                <input type="text" class="form-control" id="cargo_type" name="cargo_type">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="loader_id">المندوب</label>
+                <select class="form-control" id="loader_id" name="loader_id">
+                    <option value="" disabled selected>اختر السائق</option>
+                    @foreach ($loaders as $loader)
+                        <option value="{{ $loader->id }}">{{ $loader->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="agreed_days_with_vehicle">عدد الأيام المتفق عليها مع السيارة</label>
