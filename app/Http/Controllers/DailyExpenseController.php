@@ -15,7 +15,7 @@ class DailyExpenseController extends Controller
             $endDate = $request->input('end_date');
 
             // Get all daily expenses for display
-            $daily_expenses = DailyExpense::paginate(10);
+            $daily_expenses = DailyExpense::orderBy('date', 'desc')->paginate(10);
 
             // Validate dates
             if ($startDate && $endDate) {
