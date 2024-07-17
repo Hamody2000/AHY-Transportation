@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('employees/{employee}/loans', [LoanController::class, 'showEmployeeLoans'])->name('employees.loans');
     Route::get('/invoices/individual/{id}', [IndividualTransactionController::class, 'printInvoice'])->name('invoices.individual');
     Route::get('/invoices/company/{id}', [CompanyTransactionController::class, 'printInvoice'])->name('invoices.company');
-    Route::get('company-transactions/{id}/print-driver-invoice', [CompanyTransactionController::class, 'printDriverInvoice'])->name('invoices.driver');
+    Route::get('/invoices/company/{id}', [CompanyTransactionController::class, 'printDriverInvoice'])->name('invoices.driver');
 
     Route::get('clients/{id}/transactions', [ClientController::class, 'showTransactions'])->name('clients.transactions');
     Route::get('/transactions/search', [TransactionController::class, 'search'])->name('transactions.search');
