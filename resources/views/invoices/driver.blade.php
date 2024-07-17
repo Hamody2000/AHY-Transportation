@@ -147,10 +147,10 @@
         <div class="invoice-details">
             <table>
                 <tbody>
-                    @if ($transaction->employee->name)
+                    @if ($transaction->driver->name)
                         <tr>
                             <th>اسم السائق</th>
-                            <td>{{ $transaction->client->name }}</td>
+                            <td>{{ $transaction->driver->name }}</td>
                         </tr>
                     @endif
                     @if ($transaction->client->name)
