@@ -13,24 +13,34 @@ class TransactionController extends Controller
 {
     public function search(Request $request)
     {
-        $date = $request->input('date');
+        // Get the date range from the request
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-        $searchDate = \Carbon\Carbon::parse($date);
+        // Parse the dates using Carbon
+        $start = \Carbon\Carbon::parse($startDate)->startOfDay();
+        $end = \Carbon\Carbon::parse($endDate)->endOfDay();
 
-        // Fetch individual transactions for the given date
-        $individualTransactions = IndividualTransaction::whereDate('date', $searchDate)->get();
+        // Fetch individual transactions within the date range
+        $individualTransactions = IndividualTransaction::whereBetween('date', [$start, $end])->get();
 
-        // Fetch company transactions for the given date
-        $companyTransactions = CompanyTransaction::whereDate('date', $searchDate)->get();
+        // Fetch company transactions within the date range
+        $companyTransactions = CompanyTransaction::whereBetween('date', [$start, $end])->get();
 
         // Merge individual and company transactions
         $transactions = $individualTransactions->merge($companyTransactions);
 
+        // Calculate total commission (assuming you have a 'commission' column in your transactions table)
+        $totalCommission = $transactions->sum('commission');
+
         return view('transactions.search', [
             'transactions' => $transactions,
-            'searchDate' => $searchDate
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'totalCommission' => $totalCommission
         ]);
     }
+
     public function addTransaction(Request $request, $clientId)
     {
         // Validate the request

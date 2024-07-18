@@ -8,11 +8,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto custom-nav">
             <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('transactions.search') }}">بحـث </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('daily_expenses.index') }}">المصاريف اليومية</a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{ route('client_revenues.index') }}">إيرادات العملاء</a>
-            </li> --}}
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('employees.index') }}">الموظفين</a>
             </li>
