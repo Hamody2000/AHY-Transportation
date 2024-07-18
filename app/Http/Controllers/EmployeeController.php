@@ -13,9 +13,8 @@ class EmployeeController extends Controller
         try {
             $employees = Employee::all();
 
-            $totalTips = Employee::where('type', '!=', 'driver')->get()->sum(function ($employee) {
-                return $employee->tipsForCurrentMonth();
-            });
+            $totalTips = Employee::tipsForCurrentMonth();
+            
             $totalEmployees = Employee::where('type', '!=', 'driver')->count();
             $tipsPerEmployee = $totalEmployees > 0 ? $totalTips / $totalEmployees : 0;
             $typeTranslations = [
