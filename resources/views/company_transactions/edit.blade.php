@@ -8,28 +8,44 @@
             @csrf
             @method('PUT')
 
-            <!-- Client Selection -->
-            <div class="form-group">
-                <label for="client_id">العميل</label>
-                <select class="form-control" id="client_id" name="client_id" required>
-                    <option value="" disabled selected>اختر العميل</option>
-                    @foreach ($clients as $client)
-                        <option value="{{ $client->id }}" {{ $transaction->client_id == $client->id ? 'selected' : '' }}>
-                            {{ $client->name }}
-                        </option>
-                    @endforeach
-                </select>
+            <!-- Client and driver Selection -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="client_id">العميل</label>
+                    <select class="form-control" id="client_id" name="client_id" required>
+                        <option value="" disabled selected>اختر العميل</option>
+                        @foreach ($clients as $client)
+                            <option value="{{ $client->id }}"
+                                {{ $transaction->client_id == $client->id ? 'selected' : '' }}>
+                                {{ $client->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="driver_id">السائق</label>
+                    <select class="form-control" id="driver_id" name="driver_id">
+                        <option value="" disabled selected>اختر السائق</option>
+                        @foreach ($drivers as $driver)
+                            <option value="{{ $driver->id }}"
+                                {{ $transaction->driver_id == $driver->id ? 'selected' : '' }}>{{ $driver->name }}
+                                {{ $driver->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <!-- loader and cargo_type -->
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cargo_type">نوع الحمولة</label>
-                    <input type="text" class="form-control" id="cargo_type" name="cargo_type">
+                    <input type="text" class="form-control" id="cargo_type" name="cargo_type"
+                        value="{{ $transaction->cargo_type }}">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="loader_id">المندوب</label>
                     <select class="form-control" id="loader_id" name="loader_id">
-                        <option value="" disabled selected>اختر السائق</option>
+                        <option value="" disabled selected>اختر المندوب</option>
                         @foreach ($loaders as $loader)
                             <option value="{{ $loader->id }}"
                                 {{ $transaction->loader_id == $loader->id ? 'selected' : '' }}>{{ $loader->name }}</option>
@@ -64,7 +80,7 @@
                         value="{{ $transaction->price_per_ton_car }}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="tonnage">الحمولة</label>
+                    <label for="tonnage">عدد الطن</label>
                     <input type="number" class="form-control" id="tonnage" name="tonnage"
                         value="{{ $transaction->tonnage }}" required>
                 </div>
@@ -90,7 +106,7 @@
                         value="{{ $transaction->transfer }}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="overnight_stay">الإقامة الليلية</label>
+                    <label for="overnight_stay">المبيت </label>
                     <input type="number" class="form-control" id="overnight_stay" name="overnight_stay"
                         value="{{ $transaction->overnight_stay }}">
                 </div>
@@ -108,13 +124,6 @@
                     <input type="text" class="form-control" id="location_to" name="location_to"
                         value="{{ $transaction->location_to }}" required>
                 </div>
-            </div>
-
-            <!-- Total -->
-            <div class="form-group">
-                <label for="total">الإجمالي</label>
-                <input type="number" class="form-control" id="total" name="total"
-                    value="{{ $transaction->total }}" required>
             </div>
 
             <!-- Submit Button -->

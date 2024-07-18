@@ -11,11 +11,13 @@ class IndividualTransaction extends Model
     use HasFactory;
     protected $casts = [
         'date' => 'date',
+        'detention_date' => 'date',
     ];
 
     protected $fillable = [
         'client_id',
         'date',
+        'detention_date',
         'location_from',
         'location_to',
         'fare',
@@ -103,15 +105,16 @@ class IndividualTransaction extends Model
     // IndividualTransaction.php
     public function getOvernightDaysAttribute()
     {
-        if ($this->is_finished) {
-            return $this->attributes['overnight_days']; // Return the saved overnight days if the transaction is finished
-        }
+        // if ($this->is_finished) {
+        //     return $this->attributes['overnight_days']; // Return the saved overnight days if the transaction is finished
+        // }
 
         $transactionDate = $this->date;
         $agreedDaysEnd = $transactionDate->copy()->addDays($this->agreed_days_with_client);
 
         $currentDate = now(); // or Carbon::now()
-        $daysPassed = $agreedDaysEnd->diffInDays($currentDate, false);
+        $detentionDate = $this->detention_date;
+        $daysPassed = $detentionDate->diffInDays($transactionDate, false);
 
         return $daysPassed > 0 ? $daysPassed : 0;
     }

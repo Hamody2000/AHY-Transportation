@@ -57,7 +57,7 @@ class CompanyTransaction extends Model
     }
     public function getTotalSpentcarAttribute()
     {
-        return  $this->detention + $this->loading  + $this->totalCar + $this->weight + $this->totalCar;
+        return  $this->detention + $this->loading  + $this->weight + $this->totalCar;
     }
     public function vehicle()
     {

@@ -153,6 +153,12 @@
                             <td>{{ $transaction->client->name }}</td>
                         </tr>
                     @endif
+                    @if ($transaction->cargo_type)
+                        <tr>
+                            <th>نوع الحمولة </th>
+                            <td>{{ number_format($transaction->cargo_type) }}</td>
+                        </tr>
+                    @endif
                     @if ($transaction->price_per_ton > 0)
                         <tr>
                             <th>سعر الطن</th>

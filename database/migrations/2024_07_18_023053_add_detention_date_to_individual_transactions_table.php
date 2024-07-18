@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::table('individual_transactions', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('loader_id')->nullable(); // Add loader_id column
-
-            // Add foreign key constraint for loader_id
-            $table->foreign('loader_id')->references('id')->on('employees')->onDelete('set null');
+            $table->date('detention_date')->nullable()->after('date');
         });
     }
 
@@ -27,8 +24,7 @@ return new class extends Migration
     {
         Schema::table('individual_transactions', function (Blueprint $table) {
             //
-            $table->dropForeign(['loader_id']);
-            $table->dropColumn( 'loader_id');
+            $table->dropColumn('detention_date');
         });
     }
 };

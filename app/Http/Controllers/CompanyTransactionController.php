@@ -58,7 +58,6 @@ class CompanyTransactionController extends Controller
         $data = $request->all();
         $data['total'] = $data['price_per_ton'] * $data['tonnage'];
         $data['totalCar'] = $data['price_per_ton_car'] * $data['tonnage'];
-
         $data['commission'] = $data['tonnage'] * ($data['price_per_ton'] - $data['price_per_ton_car']);
 
         CompanyTransaction::create($data);

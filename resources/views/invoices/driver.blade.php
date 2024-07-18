@@ -159,6 +159,12 @@
                             <td>{{ $transaction->client->name }}</td>
                         </tr>
                     @endif
+                    @if ($transaction->cargo_type)
+                        <tr>
+                            <th>نوع الحمولة </th>
+                            <td>{{ number_format($transaction->cargo_type) }}</td>
+                        </tr>
+                    @endif
                     @if ($transaction->price_per_ton_car > 0)
                         <tr>
                             <th>سعر الطن</th>
@@ -207,7 +213,7 @@
                             <td>{{ number_format($transaction->weight) }} جنيه</td>
                         </tr>
                     @endif
-                    @if ($transaction->total > 0)
+                    @if ($transaction->TotalSpentcar > 0)
                         <tr>
                             <th>الإجمالي</th>
                             <td>{{ number_format($transaction->TotalSpentcar) }} جنيه</td>

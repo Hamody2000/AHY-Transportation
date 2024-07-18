@@ -131,6 +131,11 @@
                     <input type="number" step="0.01" class="form-control" id="detention" name="detention" value="{{ old('detention', $transaction->detention) }}">
                 </div>
                 <div class="form-group col-md-6">
+                    <label for="detention_date"> تاريخ التعتيق</label>
+                    <input type="date" class="form-control" id="detention_date" name="detention_date"
+                        value="{{ old('detention_date', $transaction->detention_date ?? '') }}">
+                </div>
+                <div class="form-group col-md-6">
                     <label for="loading">التحميل</label>
                     <input type="number" step="0.01" class="form-control" id="loading" name="loading" value="{{ old('loading', $transaction->loading) }}">
                 </div>

@@ -68,7 +68,6 @@ class IndividualTransactionController extends Controller
             'vehicle_allowance' => 'nullable|numeric',
             'driver_id' => 'nullable|exists:employees,id',
             'loader_id' => 'nullable|exists:employees,id',
-
             'vehicle_id' => 'required|exists:vehicles,id',
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
@@ -79,6 +78,7 @@ class IndividualTransactionController extends Controller
             'transfer' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
             'cargo_type' => 'nullable|string|max:255',
+            'detention_date' => 'nullable|date',
         ]);
 
         try {
@@ -137,7 +137,6 @@ class IndividualTransactionController extends Controller
             'driver_id' => 'nullable|exists:employees,id',
             'vehicle_id' => 'nullable|exists:vehicles,id',
             'loader_id' => 'nullable|exists:employees,id',
-
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
             'overnight_price_with_client' => 'required|numeric',
@@ -147,6 +146,7 @@ class IndividualTransactionController extends Controller
             'transfer' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
             'cargo_type' => 'nullable|string|max:255',
+            'detention_date' => 'nullable|date',
         ]);
 
         try {

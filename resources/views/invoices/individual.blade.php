@@ -153,6 +153,12 @@
                             <td>{{ $transaction->client->name }}</td>
                         </tr>
                     @endif
+                    @if ($transaction->cargo_type)
+                        <tr>
+                            <th>نوع الحمولة </th>
+                            <td>{{ number_format($transaction->cargo_type) }}</td>
+                        </tr>
+                    @endif
                     @if ($transaction->location_from)
                         <tr>
                             <th>المكان من</th>
@@ -177,7 +183,7 @@
                             <td>{{ number_format($transaction->OvernightForClient) }} جنيه</td>
                         </tr>
                     @endif
-              
+
                     @if ($transaction->transfer > 0)
                         <tr>
                             <th>التحويل </th>

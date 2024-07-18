@@ -60,6 +60,7 @@
                         <td>{{ $transaction->driver ? $transaction->driver->name : 'غير متوفر' }}</td>
                         <td>{{ $transaction->vehicle ? $transaction->vehicle->license_plate : 'غير متوفر' }}</td>
                         <td>{{ number_format($transaction->detention) }} جنيه</td>
+                        <td>{{ $transaction->detention_date ? $transaction->detention_date->format('Y-m-d') : 'غير متوفر' }}</td>
                         <td>{{ number_format($transaction->loading) }} جنيه</td>
                         <td>{{ number_format($transaction->agreed_days_with_vehicle) }} يوم</td>
                         <td>{{ number_format($transaction->agreed_days_with_client) }} يوم</td>
