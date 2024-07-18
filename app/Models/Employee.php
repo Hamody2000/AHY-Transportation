@@ -52,7 +52,7 @@ class Employee extends Model
     public function remainingSalary()
     {
         $totalTips = self::tipsForCurrentMonth();
-        $totalEmployees = Employee::count();
+        $totalEmployees = Employee::where('type', '!=', 'driver')->count();
 
         $tipsPerEmployee = $totalEmployees > 0 ? $totalTips / $totalEmployees : 0;
         $totalLoans = $this->totalLoansForCurrentMonth();

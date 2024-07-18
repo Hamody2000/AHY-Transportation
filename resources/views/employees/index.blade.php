@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="mb-4">الموظفون</h1>
     <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">إضافة موظف جديد</a>
-    <h6 class="mb-4">اجمالي الاكرامية: {{ number_format($totalTips, 0) }} جنيه</h6>
+    <h6 class="mb-4">اجمالي الاكرامية للشهر الحالي: {{ number_format($totalTips, 0) }} جنيه</h6>
 
     <div class="table-responsive">
         <table class="table table-striped table-bordered">

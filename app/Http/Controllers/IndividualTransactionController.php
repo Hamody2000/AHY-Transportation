@@ -16,7 +16,7 @@ class IndividualTransactionController extends Controller
             // Use pagination to limit the number of records fetched at once
             $transactions = IndividualTransaction::with('client', 'spends')
                 ->orderBy('date', 'desc')
-                ->paginate(10); // Adjust the number of items per page as needed
+                ->paginate(10); 
 
             // Calculate totals for each client
             $clientTotals = $transactions->groupBy('client_id')->map(function ($transactions) {
