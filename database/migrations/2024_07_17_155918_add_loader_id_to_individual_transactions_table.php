@@ -28,7 +28,7 @@ return new class extends Migration
         Schema::table('individual_transactions', function (Blueprint $table) {
             //
             $table->dropForeign(['loader_id']);
-            $table->dropColumn( 'loader_id');
+            $table->dropColumn(['cargo_type', 'loader_id']);
         });
     }
 };
