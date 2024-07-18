@@ -18,32 +18,30 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>التاريخ</th>
                     <th>اسم العميل</th>
-                    <th>النوع</th>
+                    <th>وارد منه</th>
                     <th>النولون</th>
                     <th>الإقامة الليلية</th>
-                    <th>العمولة</th>
                     <th>التحميل</th>
                     <th>التعتيق</th>
-                    <th>سعر الطن</th>
                     <th>الحمولة</th>
-                 
+                    <th>العمولة</th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach($transactions as $transaction)
                 <tr>
-                    <td>{{ $transaction->id }}</td>
+                    <td>{{ $transaction->date->format('Y-m-d') }}</td>
                     <td>{{ $transaction->client->name }}</td>
-                    <td>{{ $transaction->client->type }}</td>
+                    <td>{{ number_format($transaction->total_received) }} جنيه</td>
                     <td>{{ number_format($transaction->fare ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->overnight_stay ?? 0, 0) }} جنيه</td>
-                    <td>{{ number_format($transaction->commission ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->loading ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->detention ?? 0, 0) }} جنيه</td>
-                    <td>{{ number_format($transaction->price_per_ton ?? 0, 0) }} جنيه</td>
                     <td>{{ number_format($transaction->tonnage ?? 0, 0) }} طن</td>
+                    <td>{{ number_format($transaction->commission ?? 0, 0) }} جنيه</td>
 
                 </tr>
                 @endforeach

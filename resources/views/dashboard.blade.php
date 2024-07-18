@@ -8,7 +8,7 @@
             <a href="{{ route('transactions.search') }}" class="card-link">
                 <div class="card text-white text-center p-3" style="background-color: #6A9468; cursor: pointer;">
                     <div class="card-body">
-                        <h5 class="card-title">التعاملات اليومية</h5>
+                        <h5 class="card-title">بحـث</h5>
                     </div>
                 </div>
             </a>

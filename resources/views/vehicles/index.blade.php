@@ -9,7 +9,7 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
+
                     <th>رقم اللوحة</th>
                     <th>التفاصيل</th>
                     <th>الإجراءات</th>
@@ -18,7 +18,7 @@
             <tbody>
                 @foreach($vehicles as $vehicle)
                 <tr>
-                    <td>{{ $vehicle->id }}</td>
+                   
                     <td>{{ $vehicle->license_plate }}</td>
                     <td>{{ $vehicle->details }}</td>
                     <td>

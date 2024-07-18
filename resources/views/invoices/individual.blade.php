@@ -217,6 +217,18 @@
                             <td>{{ number_format($transaction->total_spent) }} جنيه</td>
                         </tr>
                     @endif
+                    @if ($transaction->total_received >= 0)
+                        <tr>
+                            <th>الوارد</th>
+                            <td>{{ number_format($transaction->total_received) }} جنيه</td>
+                        </tr>
+                    @endif
+                    @if ($transaction->total_spent > 0)
+                        <tr>
+                            <th>المتبقي</th>
+                            <td>{{ number_format($transaction->total_spent) - number_format($transaction->total_received) }} جنيه</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

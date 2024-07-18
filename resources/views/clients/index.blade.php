@@ -55,7 +55,7 @@
             <table class="table table-hover table-bordered text-center">
                 <thead class="thead-dark">
                     <tr>
-                        <th>ID</th>
+
                         <th>العميل</th>
                         <th>إجمالي الوارد</th>
                         <th>إجمالي المنصرف</th>
@@ -66,7 +66,7 @@
                 <tbody>
                     @foreach ($clientData as $data)
                         <tr>
-                            <td>{{ $data['client']->id }} ID</td>
+    
                             <td>{{ $data['client']->name }}</td>
                             <td>{{ number_format($data['total_received']) }} جنيه</td>
                             <td>{{ number_format($data['total_spent']) }} جنيه</td>
