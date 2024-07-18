@@ -23,6 +23,7 @@ class CompanyTransaction extends Model
         'location_from',
         'location_to',
         'total',
+        'totalCar',
         'driver_id',
         'vehicle_id',
         'loader_id',
