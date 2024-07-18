@@ -114,8 +114,8 @@ class IndividualTransaction extends Model
 
         $currentDate = now(); // or Carbon::now()
         $detentionDate = $this->detention_date;
-        if ( $detentionDate){
-            $daysPassed = $detentionDate->diffInDays($transactionDate, false);
+        if ($detentionDate){
+            $daysPassed = $agreedDaysEnd->diffInDays($detentionDate, false);
             return $daysPassed > 0 ? $daysPassed : 0;
         }
         return 0;
