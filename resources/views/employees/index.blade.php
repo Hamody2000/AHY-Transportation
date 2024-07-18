@@ -26,10 +26,10 @@
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->phone }}</td>
                     <td>{{ $typeTranslations[$employee->type] ?? $employee->type }}</td>
-                    <td>{{ number_format($employee->salary, 0) }} جنيه</td>
+                    <td>{{ $employee->type === 'driver' ? 'غير متاح' : number_format($employee->salary, 0) }} جنيه</td>
                     <td>{{ number_format($employee->totalLoansForCurrentMonth(), 0) }} جنيه</td>
-                    <td>{{ number_format($tipsPerEmployee, 0) }} جنيه</td>
-                    <td>{{ number_format($employee->remainingSalary(), 0) }} جنيه</td>
+                    <td>{{ $employee->type === 'driver' ? 'غير متاح' : number_format($tipsPerEmployee, 0) }} جنيه</td>
+                    <td>{{ $employee->type === 'driver' ? 'غير متاح' : number_format($employee->remainingSalary(), 0) }} جنيه</td>
                     <td class="text-center">
                         <!-- Button Group -->
                         <div class="btn-group" role="group" aria-label="Employee Actions" style="display: flex; justify-content: center;">

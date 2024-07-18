@@ -12,7 +12,8 @@ class EmployeeController extends Controller
     {
         try {
             $employees = Employee::all();
-            $totalTips = Employee::tipsForCurrentMonth();
+
+            $totalTips = Employee::where('type', '!=', 'driver')->tipsForCurrentMonth();
             $totalEmployees = Employee::where('type', '!=', 'driver')->count();
             $tipsPerEmployee = $totalEmployees > 0 ? $totalTips / $totalEmployees : 0;
             $typeTranslations = [
@@ -20,7 +21,7 @@ class EmployeeController extends Controller
                 'loader' => ' مندوب',
                 'accountant' => 'محاسب',
             ];
-            return view('employees.index', compact('employees', 'totalTips', 'tipsPerEmployee','typeTranslations'));
+            return view('employees.index', compact('employees', 'totalTips', 'tipsPerEmployee', 'typeTranslations'));
         } catch (\Exception $e) {
             return redirect()->route('employees.index')->with('error', 'حدث خطأ أثناء جلب بيانات الموظفين: ' . $e->getMessage());
         }
