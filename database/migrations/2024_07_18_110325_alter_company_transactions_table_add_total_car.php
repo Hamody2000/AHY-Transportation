@@ -9,25 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('company_transactions', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('loader_id')->nullable(); // Add loader_id column
-
-            // Add foreign key constraint for loader_id
-            $table->foreign('loader_id')->references('id')->on('employees')->onDelete('set null');
+            $table->decimal('totalCar', 10, 2)->nullable()->default(0.00)->change();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('company_transactions', function (Blueprint $table) {
-            $table->dropForeign(['loader_id']);
-            $table->dropColumn('loader_id');
+            $table->decimal('totalCar', 10, 2)->nullable(false)->default(null)->change();
         });
     }
 };

@@ -68,7 +68,7 @@ class IndividualTransactionController extends Controller
             'vehicle_allowance' => 'nullable|numeric',
             'driver_id' => 'nullable|exists:employees,id',
             'loader_id' => 'nullable|exists:employees,id',
-            'vehicle_id' => 'required|exists:vehicles,id',
+            'vehicle_id' => 'nullable|exists:vehicles,id',
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
             'overnight_price_with_client' => 'required|numeric',

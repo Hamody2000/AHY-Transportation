@@ -20,7 +20,7 @@
         @if (isset($transactions) && $transactions->count())
             <h5>المعاملات بتاريخ من{{ $startDate }} إلى {{ $endDate }} </h5>
             <h2>اجمالي العمولة: {{ number_format($totalCommission) }} جنيه</h2>
-            <div class="table-responsive">
+            <div class="table-responsive mt-2">
                 <table class="table table-bordered ">
                     <thead>
                         <tr>
