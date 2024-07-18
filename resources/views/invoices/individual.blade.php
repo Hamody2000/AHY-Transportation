@@ -226,7 +226,7 @@
                     @if ($transaction->total_spent > 0)
                         <tr>
                             <th>المتبقي</th>
-                            <td>{{ number_format($transaction->total_spent) - number_format($transaction->total_received) }} جنيه</td>
+                            <td>{{ number_format(number_format($transaction->total_spent) - number_format($transaction->total_received)) }} جنيه</td>
                         </tr>
                     @endif
                 </tbody>
