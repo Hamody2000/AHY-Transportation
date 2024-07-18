@@ -24,6 +24,7 @@
                     <th>السائق</th>
                     <th>السيارة</th>
                     <th>التعتيق</th>
+                    <th>تاريخ التعتيق</th>
                     <th>تحميل</th>
                     <th>الأيام المتفق عليها مع السيارة</th>
                     <th>الأيام المتفق عليها مع العميل</th>
@@ -78,7 +79,7 @@
                                     <i class="fas fa-print"></i> طباعة
                                 </a>
                                 <!-- Finish Transaction Button or Finished Icon -->
-                                @if ($transaction->is_finished)
+                                {{-- @if ($transaction->is_finished)
                                     <span class="btn btn-success btn-sm" title="تم إنهاء المعاملة">
                                         <i class="fas fa-check-circle"></i> تم إنهاء المعاملة
                                     </span>
@@ -87,7 +88,7 @@
                                         onclick="finishTransaction({{ $transaction->id }}, '{{ $transaction->client->name }}', {{ $transaction->overnight_days }})">
                                         <i class="fas fa-check"></i> إنهاء
                                     </button>
-                                @endif
+                                @endif --}}
                                 <!-- Edit Button -->
                                 <a href="{{ route('individual_transactions.edit', $transaction->id) }}"
                                     class="btn btn-warning btn-sm" title="تعديل">
