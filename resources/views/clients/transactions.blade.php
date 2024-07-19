@@ -88,7 +88,7 @@
             <p>لم يتم العثور على معاملات لهذا النوع من العملاء.</p>
         @endif
     </div>
-    <div class="mt-4">
+    {{-- <div class="mt-4">
         {{ $transactions->links() }}
-    </div>
+    </div> --}}
 @endsection

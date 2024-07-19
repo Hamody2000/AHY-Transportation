@@ -107,8 +107,8 @@ class ClientController extends Controller
             $companyTransactions = $client->companyTransactions()->orderBy('date', 'desc')->get();
 
             // Combine transactions and paginate manually
-            $transactions = $individualTransactions->merge($companyTransactions)->sortByDesc('date')->paginate(15);
-            
+            $transactions = $individualTransactions->merge($companyTransactions)->sortByDesc('date');
+
             return view('clients.transactions', compact('client'));
         } catch (\Exception $e) {
             return redirect()->route('clients.index')->with('error', 'حدث خطأ أثناء جلب معاملات العميل: ' . $e->getMessage());
