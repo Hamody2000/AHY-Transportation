@@ -99,7 +99,6 @@ class ClientController extends Controller
     {
         try {
             $client = Client::findOrFail($id);
-
             // Fetch individual and company transactions
             $individualTransactions = $client->individualTransactions()->get();
             $companyTransactions = $client->companyTransactions()->get();
@@ -108,7 +107,7 @@ class ClientController extends Controller
             $unsortedtransactions = $individualTransactions->merge($companyTransactions);
             $transactions = $unsortedtransactions->sortByDesc('date');
 
-            return view('clients.transactions', compact('client'));
+            return view('clients.transactions', compact('client', 'transactions'));
         } catch (\Exception $e) {
             return redirect()->route('clients.index')->with('error', 'حدث خطأ أثناء جلب معاملات العميل: ' . $e->getMessage());
         }
