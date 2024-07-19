@@ -69,7 +69,7 @@ class TransactionController extends Controller
     public function viewClientTransactions($clientId)
     {
         $client = Client::findOrFail($clientId);
-        $transactions = $client->transactions()->orderBy('created_at', 'desc')->get();
+        $transactions = $client->transactions()->orderBy('date', 'desc')->get();
 
         return view('transactions.client', [
             'client' => $client,

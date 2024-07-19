@@ -98,9 +98,17 @@ class ClientController extends Controller
     public function showTransactions($id)
     {
         try {
-            $client = Client::with(['individualTransactions', 'companyTransactions'])->findOrFail($id)
-            ->orderBy('date', 'desc')
-            ->paginate(15);
+            $client = Client::findOrFail($id);
+
+            // Fetch and order individual transactions
+            $individualTransactions = $client->individualTransactions()->orderBy('date', 'desc')->get();
+
+            // Fetch and order company transactions
+            $companyTransactions = $client->companyTransactions()->orderBy('date', 'desc')->get();
+
+            // Combine transactions and paginate manually
+            $transactions = $individualTransactions->merge($companyTransactions)->sortByDesc('date')->paginate(15);
+            
             return view('clients.transactions', compact('client'));
         } catch (\Exception $e) {
             return redirect()->route('clients.index')->with('error', 'حدث خطأ أثناء جلب معاملات العميل: ' . $e->getMessage());
