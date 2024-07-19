@@ -22,13 +22,13 @@ class ClientController extends Controller
             foreach ($clients as $client) {
                 // Calculate total received
                 $totalReceived = $client->individualTransactions->sum('total_received')
-                                + $client->companyTransactions->sum('total_received')
-                                + $client->transactions()->where('type', 'credit')->sum('amount');
+                    + $client->companyTransactions->sum('total_received')
+                    + $client->transactions()->where('type', 'credit')->sum('amount');
 
                 // Calculate total spent
                 $totalSpent = $client->individualTransactions->sum('total_spent')
-                              + $client->companyTransactions->sum('total_spent')
-                              + $client->transactions()->where('type', 'debit')->sum('amount');
+                    + $client->companyTransactions->sum('total_spent')
+                    + $client->transactions()->where('type', 'debit')->sum('amount');
 
                 $clientData[] = [
                     'client' => $client,
@@ -100,14 +100,13 @@ class ClientController extends Controller
         try {
             $client = Client::findOrFail($id);
 
-            // Fetch and order individual transactions
-            $individualTransactions = $client->individualTransactions()->orderBy('date', 'desc')->get();
-
-            // Fetch and order company transactions
-            $companyTransactions = $client->companyTransactions()->orderBy('date', 'desc')->get();
+            // Fetch individual and company transactions
+            $individualTransactions = $client->individualTransactions()->get();
+            $companyTransactions = $client->companyTransactions()->get();
 
             // Combine transactions and paginate manually
-            $transactions = $individualTransactions->merge($companyTransactions);
+            $unsortedtransactions = $individualTransactions->merge($companyTransactions);
+            $transactions = $unsortedtransactions->sortByDesc('date');
 
             return view('clients.transactions', compact('client'));
         } catch (\Exception $e) {
@@ -139,5 +138,4 @@ class ClientController extends Controller
             return redirect()->back()->with('error', 'حدث خطأ أثناء إضافة المعاملة: ' . $e->getMessage());
         }
     }
-
 }
