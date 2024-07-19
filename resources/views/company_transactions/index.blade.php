@@ -82,7 +82,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm mx-1" title="إزالة"
                                         onclick="return confirm('هل أنت متأكد أنك تريد حذف هذه المعاملة؟')">
-                                        <i class="fas fa-trash-alt"></i> إزالة<br>
+                                        <i class="fas fa-trash-alt"></i> إزالة
                                     </button>
                                 </form>
                                 <!-- Edit Button -->

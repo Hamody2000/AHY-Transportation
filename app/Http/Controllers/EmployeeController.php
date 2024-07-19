@@ -11,10 +11,13 @@ class EmployeeController extends Controller
     public function index()
     {
         try {
-            $employees = Employee::all();
+            $employees = Employee::all()->sortBy(function($employee) {
+                $order = ['accountant' => 1, 'loader' => 2, 'driver' => 3];
+                return $order[$employee->type];
+            });
 
             $totalTips = Employee::tipsForCurrentMonth();
-            
+
             $totalEmployees = Employee::where('type', '!=', 'driver')->count();
             $tipsPerEmployee = $totalEmployees > 0 ? $totalTips / $totalEmployees : 0;
             $typeTranslations = [

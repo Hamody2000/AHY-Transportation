@@ -41,8 +41,6 @@
                                 <td>{{ number_format($transaction->commission) }} ج.م</td>
                                 <td>{{ number_format($transaction->loading) }} ج.م</td>
                                 <td>{{ number_format($transaction->detention) }} ج.م</td>
-                                <td>{{ number_format($transaction->detention) }} ج.م</td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -61,7 +59,6 @@
                             <th>نوع الحمولة</th>
                             <th>وارد منه</th>
                             <th>العمولة</th>
-
                             <th>سعر الطن</th>
                             <th>الوزن</th>
                             <th>المبيت</th>
@@ -78,7 +75,6 @@
                                 <td>{{ $transaction->cargo_type ?? 'غير متوفر' }}</td>
                                 <td>{{ number_format($transaction->total_received) }} جنيه</td>
                                 <td>{{ number_format($transaction->commission) }} جنيه</td>
-
                                 <td>{{ number_format($transaction->price_per_ton) }} ج.م</td>
                                 <td>{{ number_format($transaction->tonnage) }} طن</td>
                                 <td>{{ number_format($transaction->overnight_stay) }} ج.م</td>
@@ -91,5 +87,8 @@
         @else
             <p>لم يتم العثور على معاملات لهذا النوع من العملاء.</p>
         @endif
+    </div>
+    <div class="mt-4">
+        {{ $transactions->links() }}
     </div>
 @endsection
