@@ -107,7 +107,7 @@ class ClientController extends Controller
             $companyTransactions = $client->companyTransactions()->orderBy('date', 'desc')->get();
 
             // Combine transactions and paginate manually
-            $transactions = $individualTransactions->merge($companyTransactions)->sortByDesc('date');
+            $transactions = $individualTransactions->merge($companyTransactions)->sortBy('date');
 
             return view('clients.transactions', compact('client'));
         } catch (\Exception $e) {
