@@ -35,11 +35,15 @@
 
             <!-- loader and cargo_type -->
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="cargo_type">نوع الحمولة</label>
                     <input type="text" class="form-control" id="cargo_type" name="cargo_type">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label for="vehicle_allowance"> عهدة السيارة</label>
+                    <input type="number" class="form-control" id="vehicle_allowance" name="vehicle_allowance">
+                </div>
+                <div class="form-group col-md-4">
                     <label for="loader_id">المندوب</label>
                     <select class="form-control" id="loader_id" name="loader_id">
                         <option value="" disabled selected>اختر السائق</option>

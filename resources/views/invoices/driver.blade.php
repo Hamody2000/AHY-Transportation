@@ -165,6 +165,12 @@
                             <td>{{ $transaction->cargo_type }}</td>
                         </tr>
                     @endif
+                    @if ($transaction->vehicle_allowance)
+                    <tr>
+                        <th> عهدة العربية </th>
+                        <td>{{ $transaction->vehicle_allowance }}</td>
+                    </tr>
+                @endif
                     @if ($transaction->price_per_ton_car > 0)
                         <tr>
                             <th>سعر الطن</th>

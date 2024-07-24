@@ -24,6 +24,7 @@ class CompanyTransaction extends Model
         'location_to',
         'total',
         'totalCar',
+        'vehicle_allowance',
         'driver_id',
         'vehicle_id',
         'loader_id',
@@ -58,7 +59,7 @@ class CompanyTransaction extends Model
     }
     public function getTotalSpentcarAttribute()
     {
-        return  $this->detention + $this->loading  + $this->weight + $this->totalCar;
+        return  $this->detention + $this->loading  + $this->weight + $this->totalCar - $this->vehicle_allowance;
     }
     public function vehicle()
     {
