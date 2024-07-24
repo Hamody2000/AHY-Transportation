@@ -168,7 +168,7 @@
                     @if ($transaction->vehicle_allowance)
                     <tr>
                         <th> عهدة العربية </th>
-                        <td>{{ $transaction->vehicle_allowance }}</td>
+                        <td>{{ number_format($transaction->vehicle_allowance) }} جنيه</td>
                     </tr>
                 @endif
                     @if ($transaction->price_per_ton_car > 0)
