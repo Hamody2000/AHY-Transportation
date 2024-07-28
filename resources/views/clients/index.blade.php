@@ -35,14 +35,14 @@
                             </a>
 
                             <!-- Delete Button -->
-                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST" style="display:inline;">
+                            {{-- <form action="{{ route('clients.destroy', $client->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm mx-1" title="حذف"
                                         onclick="return confirm('هل أنت متأكد أنك تريد حذف هذا العميل؟')">
                                     <i class="fas fa-trash-alt"></i> حذف
                                 </button>
-                            </form>
+                            </form> --}}
                         </div>
                     </td>
 
@@ -66,7 +66,7 @@
                 <tbody>
                     @foreach ($clientData as $data)
                         <tr>
-    
+
                             <td>{{ $data['client']->name }}</td>
                             <td>{{ number_format($data['total_received']) }} جنيه</td>
                             <td>{{ number_format($data['total_spent']) }} جنيه</td>
