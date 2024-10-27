@@ -14,6 +14,9 @@
                     <th>سعر الطن</th>
                     <th>عدد الأطنان</th>
                     <th>الميزان</th>
+                    <th>السائق</th>
+                    <th>صورة بطائة السائق</th>
+
                     <th>المبيت</th>
                     <th>التحميل</th>
                     <th>التعتيق</th>
@@ -21,6 +24,8 @@
                     <th>العمولة</th>
                     <th>من</th>
                     <th>إلى</th>
+                    <th> تاريخ التعتيق السيارة</th>
+                    <th> تاريخ التعتيق العميل</th>
                     <th>الإجمالي</th>
                     <th>الإجراءات</th>
                 </tr>
@@ -34,6 +39,17 @@
                         <td>{{ number_format($transaction->price_per_ton) }} جنيه</td>
                         <td>{{ $transaction->tonnage }}</td>
                         <td>{{ number_format($transaction->weight) }} جنيه</td>
+                        <td>{{ $transaction->driver_name ? $transaction->driver_name : 'غير متوفر' }}</td>
+                        <td>
+                            @if ($transaction->driver_id_photo)
+                                <img src="{{ asset('storage/' . $transaction->driver_id_photo) }}" class="thumbnail"
+                                    id="myImg" alt="Driver ID Photo">
+                            @endif
+                        </td>
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="img01">
+                        </div>
                         <td>{{ number_format($transaction->overnight_stay) }} جنيه</td>
                         <td>{{ number_format($transaction->loading) }} جنيه</td>
                         <td>{{ number_format($transaction->detention) }} جنيه</td>
@@ -41,6 +57,8 @@
                         <td>{{ number_format($transaction->commission) }} جنيه</td>
                         <td>{{ $transaction->location_from }}</td>
                         <td>{{ $transaction->location_to }}</td>
+                        <td>{{ $transaction->detention_date_car? $transaction->detention_date_car->format('Y-m-d') : '' }}</td>
+
                         <td>{{ number_format($transaction->total) }} جنيه</td>
                         {{-- <td>
                         <a href="{{ route('company_transactions.edit', $transaction->id) }}" class="btn btn-warning btn-sm">تعديل</a>
@@ -84,4 +102,25 @@
     <div class="mt-4">
         {{ $transactions->links() }}
     </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    </script>
 @endsection

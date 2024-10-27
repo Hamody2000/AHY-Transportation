@@ -18,17 +18,17 @@ class Client extends Model
     ];
     public function individualTransactions()
     {
-        return $this->hasMany(IndividualTransaction::class);
+        return $this->hasMany(IndividualTransaction::class)->orderBy('date', 'desc');
     }
 
     public function companyTransactions()
     {
-        return $this->hasMany(CompanyTransaction::class);
+        return $this->hasMany(CompanyTransaction::class)->orderBy('date', 'desc');
     }
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
     }
-    
+
 }
 

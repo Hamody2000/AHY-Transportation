@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Storage;
+
 
 class CompanyTransactionController extends Controller
 {
@@ -48,12 +50,20 @@ class CompanyTransactionController extends Controller
             'detention' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
+            'driver_id_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:4048', // Limit file size to 2MB
+            'detention_date_client' => 'nullable|date',
+            'detention_date_car' => 'nullable|date',
+
         ]);
 
         $data = $request->all();
         $data['total'] = $data['price_per_ton'] * $data['tonnage'];
         $data['commission'] = $data['tonnage'] * ($data['price_per_ton'] - $data['price_per_ton_car']);
-
+        // Handle the photo upload
+        if ($request->hasFile('driver_id_photo')) {
+            $photoPath = $request->file('driver_id_photo')->store('driver_photos', 'public');
+            $data['driver_id_photo'] = $photoPath;
+        }
         CompanyTransaction::create($data);
 
         return redirect()->route('company_transactions.index')
@@ -87,12 +97,27 @@ class CompanyTransactionController extends Controller
             'detention' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
+            'driver_id_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:4048', // Limit file size to 2MB
+            'detention_date_client' => 'nullable|date',
+            'detention_date_car' => 'nullable|date',
+
         ]);
 
         $transaction = CompanyTransaction::findOrFail($id);
         $data = $request->all();
         $data['total'] = $data['price_per_ton'] * $data['tonnage'];
         $data['commission'] = $data['tonnage'] * ($data['price_per_ton'] - $data['price_per_ton_car']);
+        // Handle the new driver photo upload
+        if ($request->hasFile('driver_id_photo')) {
+            // Delete the old photo if it exists
+            if ($transaction->driver_id_photo) {
+                Storage::delete('public/' . $transaction->driver_id_photo);
+            }
+
+            // Store the new photo and update the data array
+            $photoPath = $request->file('driver_id_photo')->store('driver_photos', 'public');
+            $data['driver_id_photo'] = $photoPath;
+        }
         $transaction->update($data);
 
         return redirect()->route('company_transactions.index')

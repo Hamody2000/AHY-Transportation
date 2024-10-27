@@ -12,5 +12,5 @@ class DailyExpense extends Model
         'date' => 'date',
     ];
 
-    protected $fillable = ['date', 'description', 'amount', 'category'];
+    protected $fillable = ['date', 'description', 'amount', 'category', 'income'];
 }

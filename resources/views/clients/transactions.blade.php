@@ -17,6 +17,7 @@
                         <th>العمولة</th>
                         <th>التحميل</th>
                         <th>التعتيق</th>
+                        <th>الاجمالي</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,8 @@
                         <td>{{ number_format($transaction->commission) }} ج.م</td>
                         <td>{{ number_format($transaction->loading) }} ج.م</td>
                         <td>{{ number_format($transaction->detention) }} ج.م</td>
+                        <td>{{ number_format($transaction->TotalSpent) }} ج.م</td>
+
                     </tr>
                     @endforeach
                 </tbody>

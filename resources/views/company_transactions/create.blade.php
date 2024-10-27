@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="mb-4">إضافة عملية شركة</h1>
 
-        <form action="{{ route('company_transactions.store') }}" method="POST">
+        <form action="{{ route('company_transactions.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- Client Selection -->
@@ -41,7 +41,17 @@
                     <input type="number" class="form-control" id="price_per_ton_car" name="price_per_ton_car">
                 </div>
             </div>
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="detention_date_client">تاريخ التعتيق (العميل)</label>
+                <input type="date" class="form-control" id="detention_date_client" name="detention_date_client" value="{{ old('detention_date_client', $transaction->detention_date_client ?? '') }}">
+            </div>
 
+            <div class="form-group col-md-6">
+                <label for="detention_date_car">تاريخ التعتيق (السيارة)</label>
+                <input type="date" class="form-control" id="detention_date_car" name="detention_date_car" value="{{ old('detention_date_car', $transaction->detention_date_car ?? '') }}">
+            </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="detention">التعتيق</label>
@@ -76,16 +86,16 @@
                 </div>
             </div>
 
-            <!-- Driver and Vehicle -->
+            <!-- Driver_name and Vehicle -->
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="driver_id">السائق</label>
-                    <select class="form-control" id="driver_id" name="driver_id">
-                        <option value="" disabled selected>اختر السائق</option>
-                        @foreach ($drivers as $driver)
-                            <option value="{{ $driver->id }}">{{ $driver->name }}</option>
-                        @endforeach
-                    </select>
+                    <label for="driver_name">السائق</label>
+                    <input type="text" class="form-control" id="driver_name" name="driver_name" >
+
+                </div>
+                <div>
+                    <label for="driver_id_photo">صورة بطاقة السائق</label>
+                    <input type="file" name="driver_id_photo" id="driver_id_photo" accept="image/*">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="vehicle_id">السيارة</label>

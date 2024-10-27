@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="mb-4">تعديل معاملة</h1>
 
-        <form action="{{ route('individual_transactions.update', $transaction->id) }}" method="POST">
+        <form action="{{ route('individual_transactions.update', $transaction->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <!-- Form Fields -->
@@ -40,7 +40,19 @@
                     <input type="number" class="form-control" id="agreed_days_with_client" name="agreed_days_with_client" value="{{ old('agreed_days_with_client', $transaction->agreed_days_with_client) }}" required>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="detention_date_client">تاريخ التعتيق (العميل)</label>
+                    <input type="date" class="form-control" id="detention_date_client" name="detention_date_client"
+                        value="{{ old('detention_date_client', $transaction->detention_date_client ?? '') }}">
+                </div>
 
+                <div class="form-group col-md-6">
+                    <label for="detention_date_car">تاريخ التعتيق (السيارة)</label>
+                    <input type="date" class="form-control" id="detention_date_car" name="detention_date_car"
+                        value="{{ old('detention_date_car', $transaction->detention_date_car ?? '') }}">
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="overnight_price_with_vehicle">سعر المبيت مع السيارة</label>
@@ -54,16 +66,30 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="driver_id">السائق</label>
-                    <select class="form-control" id="driver_id" name="driver_id">
-                        <option value="" disabled>اختر السائق</option>
-                        @foreach ($drivers as $driver)
-                            <option value="{{ $driver->id }}" {{ $transaction->driver_id == $driver->id ? 'selected' : '' }}>
-                                {{ $driver->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <label for="driver_name">السائق</label>
+                    <input type="text" class="form-control" id="driver_name" name="driver_name" value="{{ old('driver_name', $transaction->driver_name) }}" >
+
+
                 </div>
+                    <!-- Current Driver ID Photo -->
+    <div>
+        <label>Current Driver ID Photo:</label>
+        @if($transaction->driver_id_photo)
+            <img src="{{ asset('storage/' . $transaction->driver_id_photo) }}" class="thumbnail" id="myImg" alt="Driver ID Photo">
+        @else
+            <p>No driver ID photo uploaded.</p>
+        @endif
+    </div>
+    <div>
+        <label for="driver_id_photo">Upload New Driver ID Photo (optional):</label>
+        <input type="file" name="driver_id_photo" id="driver_id_photo" accept="image/*">
+    </div>
+    <!-- The Modal for enlarging the current photo -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
                 <div class="form-group col-md-6">
                     <label for="vehicle_id">السيارة</label>
                     <select class="form-control" id="vehicle_id" name="vehicle_id">
@@ -189,6 +215,23 @@
                 this.parentElement.parentElement.remove();
             });
         });
+         // Get the modal
+    var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+
+img.onclick = function () {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+}
+
+// Close the modal
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function () {
+    modal.style.display = "none";
+}
     </script>
     <!-- End of JavaScript -->
 @endsection

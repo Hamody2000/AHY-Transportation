@@ -11,6 +11,10 @@ class IndividualTransaction extends Model
     use HasFactory;
     protected $casts = [
         'date' => 'date',
+        'detention_date_car' => 'date',
+        'detention_date_client' => 'date',
+
+
     ];
 
     protected $fillable = [
@@ -27,7 +31,7 @@ class IndividualTransaction extends Model
         'loading',
         'transfer',
         'weight',
-        'driver_id',
+        'driver_name',
         'vehicle_id',
         'detention',
         'total_received', 'total_spent', 'remaining_for_client', 'remaining_from_client', 'spend_details',
@@ -41,6 +45,8 @@ class IndividualTransaction extends Model
         'tips',
         'is_finished',
         'finished_at',
+        'driver_id_photo',
+        'detention_date_client', 'detention_date_car',
     ];
     public function client()
     {

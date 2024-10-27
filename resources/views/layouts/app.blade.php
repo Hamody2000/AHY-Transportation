@@ -15,6 +15,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        .thumbnail {
+            width: 100px;
+            height: 50px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Modal styles for larger image */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Close button (top right corner) */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #ec0000;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Responsive image size on modal */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+
         body {
             direction: rtl;
             text-align: right;
@@ -83,6 +129,33 @@
 
 <body>
     @include('layouts.navbar')
+    {{-- Notification AJAX --}}
+    <div id="notifications-container">
+        <!-- Notifications will be dynamically inserted here -->
+    </div>
+
+    <!-- Notifications Section -->
+
+    @if (auth()->user()->unreadNotifications->isNotEmpty())
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>الإشعارات</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    @foreach (auth()->user()->unreadNotifications as $notification)
+                        <li>{{ $notification->data['message'] }}</li>
+                    @endforeach
+                </ul>
+
+                <!-- Mark notifications as read after displaying them -->
+                {{-- @php
+                    auth()->user()->unreadNotifications->markAsRead();
+                @endphp --}}
+            </div>
+        </div>
+    @endif
+
     <div class="container mt-5">
         <!-- Display success message -->
         @if (session('success'))

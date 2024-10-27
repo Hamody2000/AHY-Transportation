@@ -18,7 +18,11 @@
             <tbody>
                 @foreach ($clients as $client)
                 <tr>
-                    <td>{{ $client->name }}</td>
+                    <td>
+                        <a href="{{ route('transactions.select_invoice', $client->id) }}">
+                            {{ $client->name }}
+                        </a>
+                    </td>
                     <td>{{ $typeTranslations[$client->type] ?? $client->type }}</td>
                     <td>{{ $client->phone }}</td>
                     <td class="text-center">

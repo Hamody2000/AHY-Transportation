@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Storage;
+use App\Notifications\DetentionDateCarNotification;
 
 class IndividualTransactionController extends Controller
 {
@@ -64,7 +66,7 @@ class IndividualTransactionController extends Controller
             'truck_fare' => 'nullable|numeric',
             'remaining_truck_fare' => 'nullable|numeric',
             'vehicle_allowance' => 'nullable|numeric',
-            'driver_id' => 'nullable|exists:employees,id',
+            'driver' => 'nullable|string|max:255',
             'vehicle_id' => 'required|exists:vehicles,id',
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
@@ -74,10 +76,18 @@ class IndividualTransactionController extends Controller
             'detention' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
+            'driver_id_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:4048', // Limit file size to 2MB
+            'detention_date_client' => 'nullable|date',
+            'detention_date_car' => 'nullable|date',
         ]);
 
         try {
             $data = $request->all();
+            // Handle the photo upload
+            if ($request->hasFile('driver_id_photo')) {
+                $photoPath = $request->file('driver_id_photo')->store('driver_photos', 'public');
+                $data['driver_id_photo'] = $photoPath;
+            }
             $data['commission'] = $data['fare'] - $data['truck_fare'];
             $data['remaining_truck_fare'] = $data['truck_fare'] - ($data['tips'] ?? 0);
             $data['final_truck_fare'] = $data['remaining_truck_fare'] - ($data['vehicle_allowance'] ?? 0);
@@ -93,6 +103,8 @@ class IndividualTransactionController extends Controller
                 'overnight_days' => $transaction->overnight_days
             ]);
 
+     
+            //-------------------------------------------------------------
             return redirect()->route('individual_transactions.index')
                 ->with('success', 'تمت إضافة المعاملة بنجاح.');
         } catch (\Exception $e) {
@@ -128,7 +140,7 @@ class IndividualTransactionController extends Controller
             'truck_fare' => 'nullable|numeric',
             'remaining_truck_fare' => 'nullable|numeric',
             'vehicle_allowance' => 'nullable|numeric',
-            'driver_id' => 'nullable|exists:employees,id',
+            'driver' => 'nullable',
             'vehicle_id' => 'nullable|exists:vehicles,id',
             'agreed_days_with_client' => 'required|integer',
             'agreed_days_with_vehicle' => 'required|integer',
@@ -138,14 +150,30 @@ class IndividualTransactionController extends Controller
             'detention' => 'nullable|numeric',
             'transfer' => 'nullable|numeric',
             'loading' => 'nullable|numeric',
+            'driver_id_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:4048', // Limit file size to 2MB
+            'detention_date_client' => 'nullable|date',
+            'detention_date_car' => 'nullable|date',
+
         ]);
 
         try {
             $transaction = IndividualTransaction::findOrFail($id);
             $data = $request->all();
+
             $data['commission'] = $data['fare'] - $data['truck_fare'];
             $data['remaining_truck_fare'] = $data['truck_fare'] - ($data['tips'] ?? 0);
             $data['final_truck_fare'] = $data['remaining_truck_fare'] - ($data['vehicle_allowance'] ?? 0);
+          // Handle the new driver photo upload
+          if ($request->hasFile('driver_id_photo')) {
+            // Delete the old photo if it exists
+            if ($transaction->driver_id_photo) {
+                Storage::delete('public/' . $transaction->driver_id_photo);
+            }
+
+            // Store the new photo and update the data array
+            $photoPath = $request->file('driver_id_photo')->store('driver_photos', 'public');
+            $data['driver_id_photo'] = $photoPath;
+        }
             $transaction->update($data);
             $transaction->spends()->delete(); // Remove old spends
             if (isset($request->spends) && is_array($request->spends)) {
@@ -209,24 +237,23 @@ class IndividualTransactionController extends Controller
         }
     }
     // IndividualTransactionController.php
-public function finishTransaction($id)
-{
-    try {
-        $transaction = IndividualTransaction::findOrFail($id);
+    public function finishTransaction($id)
+    {
+        try {
+            $transaction = IndividualTransaction::findOrFail($id);
 
-        // Update the transaction to mark it as finished
-        $transaction->update([
-            'is_finished' => true,
-            'finished_at' => now(),
-            'overnight_days' => $transaction->overnight_days, // Save the current overnight days
-        ]);
+            // Update the transaction to mark it as finished
+            $transaction->update([
+                'is_finished' => true,
+                'finished_at' => now(),
+                'overnight_days' => $transaction->overnight_days, // Save the current overnight days
+            ]);
 
-        return redirect()->route('individual_transactions.index')
-            ->with('success', 'تم إنهاء المعاملة بنجاح.');
-    } catch (\Exception $e) {
-        return redirect()->route('individual_transactions.index')
-            ->with('error', 'حدث خطأ أثناء إنهاء المعاملة: ' . $e->getMessage());
+            return redirect()->route('individual_transactions.index')
+                ->with('success', 'تم إنهاء المعاملة بنجاح.');
+        } catch (\Exception $e) {
+            return redirect()->route('individual_transactions.index')
+                ->with('error', 'حدث خطأ أثناء إنهاء المعاملة: ' . $e->getMessage());
+        }
     }
-}
-
 }

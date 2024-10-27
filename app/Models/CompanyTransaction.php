@@ -11,6 +11,8 @@ class CompanyTransaction extends Model
 
     protected $casts = [
         'date' => 'date',
+        'detention_date_car' => 'date',
+        'detention_date_client' => 'date',
     ];
     protected $fillable = [
         'client_id',
@@ -23,14 +25,16 @@ class CompanyTransaction extends Model
         'location_from',
         'location_to',
         'total',
-        'driver_id',
+        'driver_name',
         'vehicle_id',
+        'detention_date_client', 'detention_date_car',
         'loading',
         'transfer',
         'weight',
         'detention',
         'total_received',
         'spend_details',
+        'driver_id_photo'
 
     ];
     public function client()
